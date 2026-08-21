@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "friendmod",
+  "version": "${version}",
+  "name": "FriendMod",
+  "description": "See when your friend is online, what world/server they're on, and chat with them.",
+  "authors": ["you"],
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.friendmod.FriendModClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.0",
+    "fabric-api": "*",
+    "minecraft": ">=26.2",
+    "java": ">=25"
+  }
+}
