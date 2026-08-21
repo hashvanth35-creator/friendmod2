@@ -14,21 +14,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up JDK 25
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          java-version: '25'
+          java-version: '21'
           distribution: 'temurin'
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
+      - name: Make Gradlew Executable
+        run: chmod +x gradlew
+        working-directory: mod
+
       - name: Build Mod with Gradle
-        run: gradle build
+        run: ./gradlew build --no-daemon
         working-directory: mod
 
       - name: Upload Mod Jar Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: friendmod-jar
+          name: friendmod-26.2-jar
           path: mod/build/libs/*.jar
