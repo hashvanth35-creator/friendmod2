@@ -1,4 +1,4 @@
-name: Build Fabric Mod Jar
+name: Build and Release Mod Jar
 
 on:
   push:
