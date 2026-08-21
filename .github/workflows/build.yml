@@ -1,6 +1,8 @@
-name: Build and Upload Release Jar
+name: Build Fabric Mod Jar
 
 on:
+  push:
+    branches: [ "main" ]
   release:
     types: [published]
 
@@ -24,15 +26,18 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
-      - name: Make Gradlew Executable
-        run: chmod +x gradlew
+      - name: Build Mod with Gradle
+        run: gradle build --no-daemon
         working-directory: mod
 
-      - name: Build Mod with Gradle
-        run: ./gradlew build --no-daemon
-        working-directory: mod
+      - name: Upload Mod Jar Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: friendmod-jar
+          path: mod/build/libs/*.jar
 
       - name: Attach JAR to Release
+        if: github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
           files: mod/build/libs/*.jar
